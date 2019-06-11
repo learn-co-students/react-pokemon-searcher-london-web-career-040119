@@ -1,11 +1,14 @@
 import React from 'react'
-import PokemonIndex from './components/PokemonIndex'
+import PokemonPage from './components/PokemonPage'
 import './App.css'
 
-const App = () => (
-  <div className="App">
-    <PokemonIndex />
-  </div>
-)
+const App = () => {
+  return (
+    <div className="App">
+      <PokemonPage/>
+    </div>
+  )
+}
+  
 
 export default App
