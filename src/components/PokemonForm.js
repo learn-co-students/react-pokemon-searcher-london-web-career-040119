@@ -12,13 +12,30 @@ class PokemonForm extends React.Component {
   state = initialState;
 
   handleSubmit = e => {
-    console.log(e.target.name.value);
+    e.preventDefault();
+    const { name, hp, backUrl, frontUrl } = this.state;
+    const pokemon = {
+      name: name,
+      stats: [{ name: "hp", value: hp }],
+      sprites: {
+        back: backUrl,
+        front: frontUrl
+      }
+    };
 
-    // fetch('http://localhost:3000/pokemon', {
-    //   method: ,
-    //   headers: ,
-    //   body: 
-    // })
+    const baseUrl = "http://localhost:3000";
+    const pokemonsUrl = baseUrl + "/pokemon";
+
+    const post = (url, data) =>
+      fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      }).then(resp => resp.json())
+
+    post(pokemonsUrl, pokemon);
+    this.setState(initialState)  
+    this.props.renderNewPokemon(pokemon)
 
   };
 
@@ -28,16 +45,15 @@ class PokemonForm extends React.Component {
     });
   };
 
-  // onSearchChange={_.debounce(this.updateSearchTerm, 500)}
-
   render() {
+    const { handleSubmit, handleChange } = this;
     return (
       <div>
         <h3>Add a Pokemon!</h3>
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           <Form.Group widths="equal">
             <Form.Input
-              onChange={this.handleChange}
+              onChange={handleChange}
               fluid
               label="Name"
               placeholder="Name"
@@ -45,7 +61,7 @@ class PokemonForm extends React.Component {
               value={this.state.name}
             />
             <Form.Input
-              onChange={this.handleChange}
+              onChange={handleChange}
               fluid
               label="hp"
               placeholder="hp"
@@ -53,7 +69,7 @@ class PokemonForm extends React.Component {
               value={this.state.hp}
             />
             <Form.Input
-              onChange={this.handleChange}
+              onChange={handleChange}
               fluid
               label="Front Image URL"
               placeholder="url"
@@ -61,7 +77,7 @@ class PokemonForm extends React.Component {
               value={this.state.frontUrl}
             />
             <Form.Input
-              onChange={this.handleChange}
+              onChange={handleChange}
               fluid
               label="Back Image URL"
               placeholder="url"

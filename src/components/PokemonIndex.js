@@ -12,6 +12,10 @@ class PokemonPage extends React.Component {
     value: ""
   }
 
+  renderNewPokemon = pokemon => {
+    this.setState({ pokemon:  [...this.state.pokemon, pokemon] })
+  }
+
   componentDidMount () {
     fetch('http://localhost:3000/pokemon')
     .then(resp => resp.json())
@@ -30,7 +34,7 @@ class PokemonPage extends React.Component {
     return (
       <div>
         <h1>Pokemon Searcher</h1>
-        <PokemonForm />
+        <PokemonForm renderNewPokemon={this.renderNewPokemon} />
         <br />
         <Search onSearchChange={_.debounce(this.updateSearchTerm, 500)} showNoResults={false}/>
         <br />
