@@ -22,8 +22,8 @@ class PokemonCard extends React.Component {
         <div onClick={this.toggleState}>
           <div className="image">
           {this.state.side === true
-            ? (<img src={this.props.pokemon["sprites"]["front"]} alt="oh no!" />)
-            : (<img src={this.props.pokemon["sprites"]["back"]} alt="oh no!" />)
+            ? (<img src={this.props.pokemon["sprites"]["front"]} alt="front card" />)
+            : (<img src={this.props.pokemon["sprites"]["back"]} alt="back card" />)
           }
           </div>
           <div className="content">
