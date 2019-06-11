@@ -2,20 +2,34 @@ import React from 'react'
 import { Card } from 'semantic-ui-react'
 
 class PokemonCard extends React.Component {
+
+  state = {
+    faceUp: true,
+  }
+
+  toggleFaceUp = () => {
+    this.setState({
+      faceUp: !this.state.faceUp,
+    })
+  }
+
   render() {
+    const { name, stats, sprites } = this.props
+    const hp = stats.find(stat => stat.name === 'hp').value
+    const {faceUp} = this.state
     return (
-      <Card>
+      <Card onClick={this.toggleFaceUp}>
         <div>
           <div className="image">
-            <img alt="oh no!" />
+            <img src={faceUp ? sprites.front : sprites.back} alt={name} />
           </div>
           <div className="content">
-            <div className="header">POKEMON NAME HERE</div>
+            <div className="header">{name}</div>
           </div>
           <div className="extra content">
             <span>
               <i className="icon heartbeat red" />
-              POKEMON HP HERE hp
+              {hp}
             </span>
           </div>
         </div>
