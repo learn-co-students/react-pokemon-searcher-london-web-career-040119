@@ -29,7 +29,7 @@ class PokemonPage extends React.Component {
  
   filterPokemons = (searchTerm) => {
     this.setState({filteredPokemons: this.state.pokemons.filter(
-      pokemon => pokemon.name.includes(searchTerm)
+      pokemon => pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
       )})
   }
 
