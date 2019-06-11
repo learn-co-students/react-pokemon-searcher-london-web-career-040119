@@ -34,5 +34,5 @@ class PokemonCard extends React.Component {
 }
 
 export default PokemonCard
-
+// === == === == === == === == === == === == === == === == === == ===
 // on click = if state is false = image should be front, else image should be back
